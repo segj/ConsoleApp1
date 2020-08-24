@@ -13,12 +13,25 @@ namespace ConsoleApp1
             /* foreach (var person in people)
                  Console.WriteLine(person.Gender);*/
 
-            var persons = people.Where(i => i.Height < 170 && i.IsHealthy).OrderBy(i => i.Name).ThenBy(i => i.Gender).Select(i => new { i.Name, i.Gender});
+            var persons = people.Where(i => i.Height < 170).OrderBy(i => i.Name).ThenBy(i => i.Gender).Select(i => new { i.Name, i.Gender});
 
-            foreach (var person in persons)
+            var res1 = persons.GroupBy(i => i.Gender);
+
+            foreach (var Name in res1)
+            {
+                // udskriver extension
+                Console.WriteLine($"Gruppe: {Name.Key}");
+                foreach (var gender in Name)
+                {
+                    // udskriver fil
+                    Console.WriteLine($"\t{gender}");
+                }
+            }
+
+            /*foreach (var person in persons)
             {
                 Console.WriteLine(person);
-            }
+            }*/
         }
     }
 }
